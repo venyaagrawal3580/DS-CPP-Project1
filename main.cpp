@@ -1,4 +1,6 @@
+
 #include <iostream>
+#include <limits>
 #include <cstdlib>
 
 #include "Game.h"
@@ -6,78 +8,83 @@
 
 using namespace std;
 
-
 // Display the main menu
 void displayMenu()
 {
-    cout << "========================================" << endl;
-    cout << "               PLAYABLE                 " << endl;
-    cout << "       Interactive Game Platform        " << endl;
-    cout << "========================================" << endl;
+    cout << "========================================\n";
+    cout << "              PLAYABLE\n";
+    cout << "       Interactive Game Platform\n";
+    cout << "========================================\n\n";
 
-    cout << endl;
+    cout << "  Select a game to play:\n\n";
+    cout << "  1. Snake\n";
+    cout << "  2. Sudoku          [Coming Soon]\n";
+    cout << "  3. Minesweeper     [Coming Soon]\n";
+    cout << "  4. Tic-Tac-Toe     [Coming Soon]\n";
+    cout << "  5. Exit\n\n";
 
-    cout << "                MENU                    " << endl;
-    cout << "----------------------------------------" << endl;
-
-    cout << "   1. Snake" << endl;
-    cout << "   2. Sudoku" << endl;
-    cout << "   3. Minesweeper" << endl;
-    cout << "   4. Tic-Tac-Toe" << endl;
-    cout << "   5. Exit" << endl;
-
-    cout << "----------------------------------------" << endl;
-    cout << "Enter your choice: ";
+    cout << "----------------------------------------\n";
+    cout << "Enter your choice (1-5): ";
 }
-
 
 int main()
 {
     Snake snake;
-
     int choice;
 
     while (true)
     {
         system("cls");
-
         displayMenu();
 
-        cin >> choice;
+        // Validate user input
+        if (!(cin >> choice))
+        {
+            cin.clear();
+            cin.ignore(
+                numeric_limits<streamsize>::max(), '\n'
+            );
+
+            cout << "\nInvalid input! Please enter a number.\n";
+            system("pause");
+            continue;
+        }
 
         system("cls");
 
+        switch (choice)
+        {
+            case 1:
+            {
+                Game* game = &snake;
+                game->run();
+                break;
+            }
 
-        if (choice == 1)
-        {
-            Game* game = &snake;
+            case 2:
+                cout << "Sudoku is coming soon!\n";
+                cout << "Stay tuned for future updates.\n";
+                system("pause");
+                break;
 
-            game->run();
-        }
-        else if (choice == 2)
-        {
-            cout << "Sudoku module coming soon..." << endl;
-            system("pause");
-        }
-        else if (choice == 3)
-        {
-            cout << "Minesweeper module coming soon..." << endl;
-            system("pause");
-        }
-        else if (choice == 4)
-        {
-            cout << "Tic-Tac-Toe module coming soon..." << endl;
-            system("pause");
-        }
-        else if (choice == 5)
-        {
-            cout << "Thank you for playing PLAYABLE!" << endl;
-            break;
-        }
-        else
-        {
-            cout << "Invalid choice!" << endl;
-            system("pause");
+            case 3:
+                cout << "Minesweeper is coming soon!\n";
+                system("pause");
+                break;
+
+            case 4:
+                cout << "Tic-Tac-Toe is coming soon!\n";
+                system("pause");
+                break;
+
+            case 5:
+                cout << "Thanks for playing PLAYABLE!\n";
+                cout << "Keep exploring and have fun!\n";
+                return 0;
+
+            default:
+                cout << "Invalid choice! Select a number from 1 to 5.\n";
+                system("pause");
         }
     }
 
