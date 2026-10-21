@@ -1,12 +1,15 @@
+
 #ifndef GAME_H
 #define GAME_H
 
 class Game
 {
 public:
-    virtual void run() = 0;
+    // Virtual destructor for safe polymorphic use
+    virtual ~Game() = default;
 
-    virtual ~Game() {}
+    // Common interface for all games
+    virtual void run() = 0;
 };
 
 #endif
